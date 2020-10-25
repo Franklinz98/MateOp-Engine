@@ -8,7 +8,6 @@ class Exercise {
   int hesitations;
   int dificulty;
   int loID;
-  int type;
   OperationType operation;
   Duration duration;
 
@@ -18,7 +17,7 @@ class Exercise {
       this.answer,
       this.playerAnswer,
       this.loID,
-      this.type});
+      this.operation});
 
   Map<String, dynamic> toJson() => {
         'firstOperator': firstOperator,
@@ -26,7 +25,7 @@ class Exercise {
         'answer': answer,
         'player_answer': playerAnswer,
         'loID': loID,
-        'type': type
+        'type': operation.index
       };
 
   factory Exercise.fromJson(Map<String, dynamic> json) {
@@ -36,6 +35,6 @@ class Exercise {
         answer: json['answer'],
         playerAnswer: json['player_answer'],
         loID: json['loID'],
-        type: json['type']);
+        operation: OperationType.values[json['type']]);
   }
 }

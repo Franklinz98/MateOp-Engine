@@ -33,7 +33,6 @@ void start(Playground playground) async {
                     exerciseManager.allExercises = exercises;
                     exerciseManager.currentExercise = 0;
                     exerciseManager.finalTime = Duration();
-                    PerformanceVectors.writeJsonInFile(performanceData);
                     playground.startSession();
                   }))
               .catchError((error) {}))
@@ -50,19 +49,13 @@ void start(Playground playground) async {
                 performanceVectors.grado = user.grade;
                 performanceVectors.sesion = user.session;
                 performanceVectors.tipoEscuela = user.schoolType;
-                performanceVectors.setBinloPerformanceVectors([
-                  [1, 0]
-                ], [
-                  [1, 0]
-                ], [
-                  [1, 0]
-                ], [
-                  [1, 0]
-                ], [
+                performanceVectors.setBinperPerformanceVectors([
+                  [1, 0],
+                  [1, 0],
+                  [1, 0],
+                  [1, 0],
                   [1, 0]
                 ]);
-                performanceVectors.setBinperPerformanceVectors(
-                    [1, 0], [1, 0], [1, 0], [1, 0], [1, 0]);
                 performanceVectors.writeObjectInFile(localPath);
                 playground.startSession();
               }))

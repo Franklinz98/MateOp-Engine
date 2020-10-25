@@ -114,16 +114,16 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       loId = 0;
       if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(10);
-          sumOp2 = Random().nextInt(11);
+          sumOp1 = Random().nextInt(10) + 1;
+          sumOp2 = Random().nextInt(10) + 1;
         } while (sumOp1 + sumOp2 < 10 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
             !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
       } else {
         do {
-          sumOp1 = Random().nextInt(10);
-          sumOp2 = Random().nextInt(11);
+          sumOp1 = Random().nextInt(10) + 1;
+          sumOp2 = Random().nextInt(10) + 1;
         } while ((sumOp1 + sumOp2) >= 10 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
@@ -131,31 +131,32 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       }
     } else if (loIDString == "LOIN1") {
       loId = 1;
-      if (i < 10) {
+      sumOp2 = 10;
+      if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(11);
-        } while (!_canBeAddedToList(choosenNumbersSum1, sumOp1, 1));
-        sumOp2 = 10;
+          sumOp1 = Random().nextInt(10) + 5;
+        } while ((sumOp1 + sumOp2) <= 15 ||
+            !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2));
       } else {
         do {
-          sumOp2 = Random().nextInt(11);
-        } while (!_canBeAddedToList(choosenNumbersSum2, sumOp2, 1));
-        sumOp1 = 10;
+          sumOp1 = Random().nextInt(5) + 1;
+        } while ((sumOp1 + sumOp2) > 15 ||
+            !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2));
       }
     } else if (loIDString == "LOIN2") {
       loId = 2;
       if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(10);
+          sumOp1 = Random().nextInt(10) + 1;
           sumOp2 = Random().nextInt(100) + 10;
-        } while (sumOp1 + sumOp2 < 100 ||
+        } while (sumOp1 + sumOp2 >= 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
             !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
       } else {
         do {
-          sumOp1 = Random().nextInt(11);
-          sumOp2 = Random().nextInt(100) + 10;
+          sumOp1 = Random().nextInt(100) + 10;
+          sumOp2 = Random().nextInt(10) + 1;
         } while (sumOp1 + sumOp2 >= 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
@@ -163,10 +164,23 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       }
     } else if (loIDString == "LOIN3") {
       loId = 3;
-      do {
-        sumOp1 = Random().nextInt(100) + 10;
-      } while (!_canBeAddedToList(choosenNumbersSum1, sumOp1, 1));
-      sumOp2 = 10;
+      if (dificulty == 1) {
+        do {
+          sumOp1 = Random().nextInt(10) + 1;
+          sumOp2 = Random().nextInt(100) + 10;
+        } while (sumOp1 + sumOp2 < 100 ||
+            !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
+            !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
+            !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
+      } else {
+        do {
+          sumOp1 = Random().nextInt(100) + 10;
+          sumOp2 = Random().nextInt(10) + 1;
+        } while (sumOp1 + sumOp2 < 100 ||
+            !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
+            !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
+            !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
+      }
     } else {
       loId = 4;
       if (dificulty == 1) {
@@ -181,7 +195,7 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
         do {
           sumOp1 = Random().nextInt(100) + 10;
           sumOp2 = Random().nextInt(100) + 10;
-        } while (sumOp1 + sumOp2 > 100 ||
+        } while (sumOp1 + sumOp2 >= 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
             !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
@@ -189,17 +203,13 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
     }
     choosenNumbersSum1.add(sumOp1);
     choosenNumbersSum2.add(sumOp2);
-    //esto es como la vista que tu hiciste
-    /*string problem = sumOp1 + "+"+ sumOp2 + "=?";
-          string answer = ""+(sumOp1 + sumOp2);*/
-
     int type = 0;
     Exercise oneExc = Exercise(
       loID: loId,
       firstOperator: sumOp1.toDouble(),
       secondOperator: sumOp2.toDouble(),
       answer: calculateAnswer(sumOp1.toDouble(), sumOp2.toDouble(), opType),
-      type: type,
+      operation: opType,
     );
     oneExc.dificulty = dificulty;
     myExercises.add(oneExc);
