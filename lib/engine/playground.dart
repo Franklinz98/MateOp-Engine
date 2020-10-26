@@ -15,11 +15,15 @@ class Playground {
   Exercise currentExercise;
   MOUser user;
 
-  void startSession() {
+  void startSession() async {
     do {
       _showExercise();
       var ready = false;
-      var playerAnswer = currentExercise.answer.toString();
+      var playerAnswer=currentExercise.answer.toString();
+      if (Random().nextDouble()>0.75) {
+        playerAnswer='-1';
+      } else {
+      }
       /* var playerAnswer = double.infinity.toString();
       while (!ready) {
         playerAnswer = stdin.readLineSync();
@@ -27,7 +31,7 @@ class Playground {
         ready = stdin.readLineSync() == 'Y';
         hesitations++;
       } */
-      onReadyButtonPress(
+      await onReadyButtonPress(
           double.parse(playerAnswer),
           Duration(seconds: Random().nextInt(10) + 5),
           Random().nextInt(2),

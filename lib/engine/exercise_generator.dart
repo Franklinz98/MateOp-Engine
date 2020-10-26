@@ -9,14 +9,16 @@ import '../models/saved_exercise.dart';
 import '../models/intensities.dart';
 import 'dart:io' as io;
 
+Random _random = Random();
+
 List<Exercise> generateRandomExercise(
     int numberOfExercises, int minNumber, int maxNumber, OperationType type) {
   var myExercises = <Exercise>[];
   for (var i = 1; i <= numberOfExercises; i++) {
     var operator1 =
-        minNumber + Random().nextInt(maxNumber - minNumber).toDouble();
+        minNumber + _random.nextInt(maxNumber - minNumber).toDouble();
     var operator2 =
-        minNumber + Random().nextInt(maxNumber - minNumber).toDouble();
+        minNumber + _random.nextInt(maxNumber - minNumber).toDouble();
     myExercises.add(
       Exercise(
         firstOperator: operator1,
@@ -114,16 +116,16 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       loId = 0;
       if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(10) + 1;
-          sumOp2 = Random().nextInt(10) + 1;
+          sumOp1 = _random.nextInt(10) + 1;
+          sumOp2 = _random.nextInt(10) + 1;
         } while (sumOp1 + sumOp2 < 10 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
             !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
       } else {
         do {
-          sumOp1 = Random().nextInt(10) + 1;
-          sumOp2 = Random().nextInt(10) + 1;
+          sumOp1 = _random.nextInt(10) + 1;
+          sumOp2 = _random.nextInt(10) + 1;
         } while ((sumOp1 + sumOp2) >= 10 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
@@ -134,12 +136,12 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       sumOp2 = 10;
       if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(10) + 5;
+          sumOp1 = _random.nextInt(10) + 5;
         } while ((sumOp1 + sumOp2) <= 15 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2));
       } else {
         do {
-          sumOp1 = Random().nextInt(5) + 1;
+          sumOp1 = _random.nextInt(5) + 1;
         } while ((sumOp1 + sumOp2) > 15 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2));
       }
@@ -147,16 +149,16 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       loId = 2;
       if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(10) + 1;
-          sumOp2 = Random().nextInt(100) + 10;
+          sumOp1 = _random.nextInt(10) + 1;
+          sumOp2 = _random.nextInt(100) + 10;
         } while (sumOp1 + sumOp2 >= 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
             !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
       } else {
         do {
-          sumOp1 = Random().nextInt(100) + 10;
-          sumOp2 = Random().nextInt(10) + 1;
+          sumOp1 = _random.nextInt(100) + 10;
+          sumOp2 = _random.nextInt(10) + 1;
         } while (sumOp1 + sumOp2 >= 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
@@ -166,16 +168,16 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       loId = 3;
       if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(10) + 1;
-          sumOp2 = Random().nextInt(100) + 10;
+          sumOp1 = _random.nextInt(10) + 1;
+          sumOp2 = _random.nextInt(100) + 10;
         } while (sumOp1 + sumOp2 < 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
             !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
       } else {
         do {
-          sumOp1 = Random().nextInt(100) + 10;
-          sumOp2 = Random().nextInt(10) + 1;
+          sumOp1 = _random.nextInt(100) + 10;
+          sumOp2 = _random.nextInt(10) + 1;
         } while (sumOp1 + sumOp2 < 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
@@ -185,16 +187,16 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
       loId = 4;
       if (dificulty == 1) {
         do {
-          sumOp1 = Random().nextInt(100) + 10;
-          sumOp2 = Random().nextInt(100) + 10;
+          sumOp1 = _random.nextInt(100) + 10;
+          sumOp2 = _random.nextInt(100) + 10;
         } while (sumOp1 + sumOp2 < 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
             !_canExerciseBeAdded(myExercises, sumOp1, sumOp2));
       } else {
         do {
-          sumOp1 = Random().nextInt(100) + 10;
-          sumOp2 = Random().nextInt(100) + 10;
+          sumOp1 = _random.nextInt(100) + 10;
+          sumOp2 = _random.nextInt(100) + 10;
         } while (sumOp1 + sumOp2 >= 100 ||
             !_canBeAddedToList(choosenNumbersSum1, sumOp1, 2) ||
             !_canBeAddedToList(choosenNumbersSum2, sumOp2, 2) ||
@@ -224,23 +226,26 @@ Future<List<Exercise>> _getPastExercisesFromFile(
   String filename = "WrongExercises";
   io.File file = getLocalFile(path, filename);
   try {
-    List<Map> savedExercises = jsonDecode(await file.readAsString());
-    List<Map> tempSavedExercises = List();
-    savedExercises.forEach((savedExerciseMap) {
-      SavedExercise savedExercise = SavedExercise.fromJson(savedExerciseMap);
-      if (savedExercise.intensity == loIDString &&
-          savedExercise.dificulty == dificulty &&
-          myExercises.length < numberExerc) {
-        Exercise previewExercise = savedExercise.exercise;
-        myExercises.add(previewExercise);
-      } else {
-        tempSavedExercises.add(savedExercise.toJson());
-      }
-      file.writeAsString(jsonEncode(tempSavedExercises),
+    if (file.existsSync()) {
+      String content = file.readAsStringSync();
+      List savedExercises = jsonDecode(content);
+      List tempSavedExercises = List();
+      savedExercises.forEach((savedExerciseMap) {
+        SavedExercise savedExercise = SavedExercise.fromJson(savedExerciseMap);
+        if (savedExercise.intensity == loIDString &&
+            savedExercise.dificulty == dificulty &&
+            myExercises.length < numberExerc) {
+          Exercise previewExercise = savedExercise.exercise;
+          myExercises.add(previewExercise);
+        } else {
+          tempSavedExercises.add(savedExercise.toJson());
+        }
+      });
+      file.writeAsStringSync(jsonEncode(tempSavedExercises),
           mode: io.FileMode.write);
-    });
+    }
   } catch (e) {
-    // If we encounter an error, return 0
+    print(e.toString());
   }
   return myExercises;
 }
@@ -249,44 +254,19 @@ writeOnFIleWrongExercise(Exercise myWrongExercise) async {
   String path = await localPath;
   String filename = "WrongExercises";
   io.File file = getLocalFile(path, filename);
-  int dificulty = _getDificultyOfExercise(myWrongExercise);
+  int dificulty = myWrongExercise.dificulty;
   SavedExercise savedExercise =
       SavedExercise("LOIN${myWrongExercise.loID}", dificulty, myWrongExercise);
   try {
-    List<Map> savedExercises = jsonDecode(await file.readAsString());
+    List savedExercises = [];
+    if (file.existsSync()) {
+      String read = file.readAsStringSync();
+      savedExercises = jsonDecode(read);
+    }
     savedExercises.add(savedExercise.toJson());
-    file.writeAsString(jsonEncode(savedExercises), mode: io.FileMode.write);
+    file.writeAsStringSync(jsonEncode(savedExercises), mode: io.FileMode.write);
   } catch (e) {
-    // If we encounter an error, return 0
-  }
-}
-
-int _getDificultyOfExercise(Exercise myExercise) {
-  double sumOp1 = myExercise.firstOperator;
-  double sumOp2 = myExercise.secondOperator;
-
-  if (myExercise.loID == 0) {
-    if (sumOp1 + sumOp2 >= 10) {
-      return 1;
-    } else {
-      return 0;
-    }
-  } else if (myExercise.loID == 1) {
-    return 0;
-  } else if (myExercise.loID == 2) {
-    if (sumOp1 + sumOp2 >= 100) {
-      return 1;
-    } else {
-      return 0;
-    }
-  } else if (myExercise.loID == 3) {
-    return 0;
-  } else {
-    if (sumOp1 + sumOp2 >= 100) {
-      return 1;
-    } else {
-      return 0;
-    }
+    print(e.toString());
   }
 }
 
@@ -322,7 +302,7 @@ double calculateAnswer(
 }
 
 List<double> generateAnswerOptions(double answer) {
-  int delta = (answer * Random().nextDouble()).round();
+  int delta = (answer * _random.nextDouble()).round();
   if (delta == 0) {
     delta = 1;
   }

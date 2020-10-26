@@ -10,3 +10,4 @@ doc/api/
 
 # Perfomance outputs
 lib/json/data/performance
+lib/json/WrongExercises.json

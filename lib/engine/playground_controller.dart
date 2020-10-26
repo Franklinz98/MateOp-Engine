@@ -6,7 +6,7 @@ import 'package:mateop_engine/models/exercise_manager.dart';
 import 'exercise_generator.dart';
 
 onReadyButtonPress(double playerAnswer, Duration duration, int hesitations,
-    ExerciseManager exerciseManager) {
+    ExerciseManager exerciseManager) async {
   if (playerAnswer != double.infinity) {
     Exercise exercise = exerciseManager.getCurrentExercise();
     exercise.playerAnswer = playerAnswer;
@@ -14,7 +14,8 @@ onReadyButtonPress(double playerAnswer, Duration duration, int hesitations,
     exerciseManager.finalTime += duration;
     exercise.hesitations = hesitations;
     if (exercise.playerAnswer != exercise.answer) {
-      writeOnFIleWrongExercise(exercise);
+      await writeOnFIleWrongExercise(exercise);
+      exerciseManager.nextExercise();
     } else {
       exerciseManager.nextExercise();
     }
