@@ -12,4 +12,5 @@ void updateFileWithVectorPerformace(
       exerciseManager.allExercises, user.grade, user.session);
   performanceVectors.writeObjectInFile(localPath);
   await updatePerformanceData(user, performanceVectors.toJson);
+  await deleteSessionFile(user);
 }

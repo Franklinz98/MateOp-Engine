@@ -20,7 +20,9 @@ class Exercise {
       this.dificulty,
       this.loID,
       this.operation,
-      this.duration});
+      duration}) {
+    this.duration = duration ?? Duration();
+  }
 
   Map<String, dynamic> toJson() => {
         'firstOperator': firstOperator,

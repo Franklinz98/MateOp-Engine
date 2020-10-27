@@ -1,12 +1,14 @@
 import 'dart:math';
 
+import 'package:mateop_engine/backend/data.dart';
 import 'package:mateop_engine/models/exercise.dart';
 import 'package:mateop_engine/models/exercise_manager.dart';
+import 'package:mateop_engine/models/user.dart';
 
 import 'exercise_generator.dart';
 
 onReadyButtonPress(double playerAnswer, Duration duration, int hesitations,
-    ExerciseManager exerciseManager) async {
+    ExerciseManager exerciseManager, MOUser user) async {
   if (playerAnswer != double.infinity) {
     Exercise exercise = exerciseManager.getCurrentExercise();
     exercise.playerAnswer = playerAnswer;
@@ -19,5 +21,6 @@ onReadyButtonPress(double playerAnswer, Duration duration, int hesitations,
     } else {
       exerciseManager.nextExercise();
     }
+    writeSessionFile(exerciseManager, user);
   }
 }

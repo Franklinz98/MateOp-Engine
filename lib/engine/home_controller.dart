@@ -8,7 +8,6 @@ import 'package:mateop_engine/engine/playground.dart';
 import 'package:mateop_engine/models/exercise_manager.dart';
 import 'package:mateop_engine/models/intensities.dart';
 import 'package:mateop_engine/models/performance_vectors.dart';
-import 'package:mateop_engine/models/session_file.dart';
 import 'package:mateop_engine/models/user.dart';
 
 import 'exercise_generator.dart';
@@ -21,9 +20,9 @@ void start(Playground playground) async {
   if (sessionFile.existsSync()) {
     String fileContent = await sessionFile.readAsString();
     Map jsonObject = json.decode(fileContent);
-    SessionFile session = SessionFile.fromJson(jsonObject);
-    exerciseManager.currentExercise = session.index;
-    exerciseManager.allExercises = session.exercises;
+    ExerciseManager session = await readSessionFile(user);
+    exerciseManager.currentExercise = session.currentExercise;
+    exerciseManager.allExercises = session.allExercises;
   } else {
     if (user.hasPerformanceData) {
       Map performanceData = await getPerformanceData(user);

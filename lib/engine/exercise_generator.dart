@@ -84,7 +84,13 @@ Future<List<Exercise>> generateExercisesFromLOPerformance(
       myExercises.add(ex);
     }
   }
-
+  String path = await localPath;
+  String filename = "WrongExercises";
+  io.File file = getLocalFile(path, filename);
+  if (file.existsSync()) {
+    print("delete");
+    file.deleteSync();
+  }
   return myExercises;
 }
 

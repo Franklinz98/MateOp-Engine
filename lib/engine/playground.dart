@@ -19,11 +19,10 @@ class Playground {
     do {
       _showExercise();
       var ready = false;
-      var playerAnswer=currentExercise.answer.toString();
-      if (Random().nextDouble()>0.75) {
-        playerAnswer='-1';
-      } else {
-      }
+      var playerAnswer = currentExercise.answer.toString();
+      if (Random().nextDouble() > 0.75) {
+        playerAnswer = '-1';
+      } else {}
       /* var playerAnswer = double.infinity.toString();
       while (!ready) {
         playerAnswer = stdin.readLineSync();
@@ -35,7 +34,8 @@ class Playground {
           double.parse(playerAnswer),
           Duration(seconds: Random().nextInt(10) + 5),
           Random().nextInt(2),
-          exerciseManager);
+          exerciseManager,
+          user);
     } while (!exerciseManager.isTestFinished());
     updateFileWithVectorPerformace(exerciseManager, user);
   }
