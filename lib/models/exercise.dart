@@ -46,4 +46,8 @@ class Exercise {
         operation: OperationType.values[json['type']],
         duration: Duration(milliseconds: json['duration']));
   }
+
+  bool checkAnswer() {
+    return this.answer == this.playerAnswer;
+  }
 }
