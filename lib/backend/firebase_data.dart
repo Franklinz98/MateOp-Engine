@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:mateop_engine/backend/data.dart';
 import 'package:mateop_engine/models/user.dart';
 
-Future<Map> getPerformanceData(MOUser user) async {
+Map getPerformanceData(MOUser user) {
   File file =
       getLocalFile('$localPath/data/performance', 'session${user.session}');
   if (file.existsSync()) {
@@ -21,10 +21,9 @@ Future<Map> getPerformanceData(MOUser user) async {
 }
 
 // Post performance data
-Future<void> updatePerformanceData(
-    MOUser user, Map performanceVectorsData) async {
+void updatePerformanceData(MOUser user, Map performanceVectorsData) {
   File file = getLocalFile(
-      '$localPath/data/performance/', 'session${user.session + 1}');
+      '$localPath/data/performance/', 'session${user.session}');
   var directory = Directory('$localPath/data/performance/');
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
@@ -34,5 +33,3 @@ Future<void> updatePerformanceData(
   }
   file.writeAsStringSync(json.encode(performanceVectorsData));
 }
-
-

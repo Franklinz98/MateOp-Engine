@@ -14,30 +14,30 @@ File getLocalFile(String path, String filename) {
   return File('$path/$filename.json');
 }
 
-Future<void> writeSessionFile(
-    ExerciseManager exerciseManager, MOUser user) async {
-  String path = await localPath;
+void writeSessionFile(ExerciseManager exerciseManager, MOUser user) {
+  String path = localPath;
   String filename = "session_file_${user.uid}";
   File file = getLocalFile(path, filename);
   file.writeAsStringSync(json.encode(exerciseManager.toJson()),
       mode: FileMode.write);
 }
 
-Future<ExerciseManager> readSessionFile(MOUser user) async {
-  String path = await localPath;
+ExerciseManager readSessionFile(MOUser user) {
+  String path = localPath;
   String filename = "session_file_${user.uid}";
   File file = getLocalFile(path, filename);
-  return ExerciseManager.fromJson(json.decode(file.readAsStringSync()));
+  String content = file.readAsStringSync();
+  return ExerciseManager.fromJson(json.decode(content));
 }
 
-Future<void> deleteSessionFile(MOUser user) async {
-  String path = await localPath;
+void deleteSessionFile(MOUser user) {
+  String path = localPath;
   String filename = "session_file_${user.uid}";
   File file = getLocalFile(path, filename);
   file.deleteSync();
 }
 
-Future<bool> setTimes() {
+/* Future<bool> setTimes() {
   Map map = {
     '1': 0,
     '2': 0,
@@ -57,14 +57,14 @@ Future<bool> setTimes() {
       mode: FileMode.write);
   file1.writeAsStringSync(json.encode({'data': los, 'metadata': los}),
       mode: FileMode.write);
-}
+} */
 
-Future<Map> getAverageTimes(int schoolType) async {
+Map getAverageTimes(int schoolType) {
   File file = getLocalFile(_filePath, 'time_data_$schoolType');
   return json.decode(file.readAsStringSync());
 }
 
-Future<void> setAverageTimes(Map map, int schoolType) async {
+void setAverageTimes(Map map, int schoolType) {
   File file = getLocalFile(_filePath, 'time_data_$schoolType');
   file.writeAsStringSync(json.encode(map), mode: FileMode.write);
 }

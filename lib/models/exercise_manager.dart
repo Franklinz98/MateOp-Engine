@@ -4,7 +4,7 @@ import 'dart:io';
 import 'exercise.dart';
 
 class ExerciseManager {
-  List<Exercise> allExercises;
+  List allExercises;
   int currentExercise;
   Duration finalTime;
 
@@ -69,9 +69,9 @@ class ExerciseManager {
       exercises.add(Exercise.fromJson(exerciseJson));
     });
     return ExerciseManager(
-      allExercises: map['allExercises'],
+      allExercises: exercises,
       currentExercise: map['currentExercise'],
-      finalTime: map['finalTime'],
+      finalTime: Duration(milliseconds: map['finalTime']),
     );
   }
   int getSessionScore() {

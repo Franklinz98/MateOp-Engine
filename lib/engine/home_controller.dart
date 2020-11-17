@@ -13,31 +13,30 @@ import 'package:mateop_engine/models/user.dart';
 import 'exercise_generator.dart';
 
 void start(Playground playground) async {
-  ExerciseManager exerciseManager = playground.exerciseManager;
   MOUser user = playground.user;
-  String path = localPath;
-  File sessionFile = getLocalFile("$path/addition", "uid");
-  if (sessionFile.existsSync()) {
-    String fileContent = await sessionFile.readAsString();
-    Map jsonObject = json.decode(fileContent);
-    ExerciseManager session = await readSessionFile(user);
-    exerciseManager.currentExercise = session.currentExercise;
-    exerciseManager.allExercises = session.allExercises;
+  /* bool sessionExist = checkSessionFile(user);
+  if (sessionExist) { */
+  if (getLocalFile(localPath, 'session_file_${user.uid}').existsSync()) {
+    playground.exerciseManager = readSessionFile(user);
+    await playground.startSession();
   } else {
     if (user.hasPerformanceData) {
-      Map performanceData = await getPerformanceData(user);
+      Map performanceData = getPerformanceData(user);
       Intensity intensity = await getNextIntensityLevel(performanceData);
       List exercises = await generateExercisesFromLOPerformance(intensity, 15);
-      exerciseManager.allExercises = exercises;
-      exerciseManager.currentExercise = 0;
-      exerciseManager.finalTime = Duration();
+      playground.exerciseManager = ExerciseManager();
+      playground.exerciseManager.allExercises = exercises;
+      playground.exerciseManager.currentExercise = 0;
+      playground.exerciseManager.finalTime = Duration();
       await playground.startSession();
     } else {
       Intensity intensity = await predictInicitalIntensity(user);
+      print('predicted');
       List exercises = await generateExercisesFromLOPerformance(intensity, 15);
-      exerciseManager.allExercises = exercises;
-      exerciseManager.currentExercise = 0;
-      exerciseManager.finalTime = Duration();
+      playground.exerciseManager = ExerciseManager();
+      playground.exerciseManager.allExercises = exercises;
+      playground.exerciseManager.currentExercise = 0;
+      playground.exerciseManager.finalTime = Duration();
       PerformanceVectors performanceVectors = PerformanceVectors();
       // performanceVectors.jsonIntensities =
       performanceVectors.grado = user.grade;

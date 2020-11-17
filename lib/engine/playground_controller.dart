@@ -17,10 +17,7 @@ onReadyButtonPress(double playerAnswer, Duration duration, int hesitations,
     exercise.hesitations = hesitations;
     if (exercise.playerAnswer != exercise.answer) {
       await writeOnFIleWrongExercise(exercise);
-      exerciseManager.nextExercise();
-    } else {
-      exerciseManager.nextExercise();
     }
-    writeSessionFile(exerciseManager, user);
+    exerciseManager.nextExercise();
   }
 }
