@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:mateop_engine/models/exercise_manager.dart';
+import 'package:mateop_engine/models/user.dart';
 import 'package:path/path.dart' as path;
 
 final _filePath = '${path.current}/lib/json';
@@ -12,7 +14,30 @@ File getLocalFile(String path, String filename) {
   return File('$path/$filename.json');
 }
 
-Future<bool> setTimes() {
+void writeSessionFile(ExerciseManager exerciseManager, MOUser user) {
+  String path = localPath;
+  String filename = "session_file_${user.uid}";
+  File file = getLocalFile(path, filename);
+  file.writeAsStringSync(json.encode(exerciseManager.toJson()),
+      mode: FileMode.write);
+}
+
+ExerciseManager readSessionFile(MOUser user) {
+  String path = localPath;
+  String filename = "session_file_${user.uid}";
+  File file = getLocalFile(path, filename);
+  String content = file.readAsStringSync();
+  return ExerciseManager.fromJson(json.decode(content));
+}
+
+void deleteSessionFile(MOUser user) {
+  String path = localPath;
+  String filename = "session_file_${user.uid}";
+  File file = getLocalFile(path, filename);
+  file.deleteSync();
+}
+
+/* Future<bool> setTimes() {
   Map map = {
     '1': 0,
     '2': 0,
@@ -32,14 +57,14 @@ Future<bool> setTimes() {
       mode: FileMode.write);
   file1.writeAsStringSync(json.encode({'data': los, 'metadata': los}),
       mode: FileMode.write);
-}
+} */
 
-Future<Map> getAverageTimes(int schoolType) async {
+Map getAverageTimes(int schoolType) {
   File file = getLocalFile(_filePath, 'time_data_$schoolType');
   return json.decode(file.readAsStringSync());
 }
 
-Future<void> setAverageTimes(Map map, int schoolType) async {
+void setAverageTimes(Map map, int schoolType) {
   File file = getLocalFile(_filePath, 'time_data_$schoolType');
   file.writeAsStringSync(json.encode(map), mode: FileMode.write);
 }

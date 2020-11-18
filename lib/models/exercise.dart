@@ -20,7 +20,9 @@ class Exercise {
       this.dificulty,
       this.loID,
       this.operation,
-      this.duration});
+      duration}) {
+    this.duration = duration ?? Duration();
+  }
 
   Map<String, dynamic> toJson() => {
         'firstOperator': firstOperator,
@@ -41,7 +43,7 @@ class Exercise {
         answer: json['answer'],
         playerAnswer: json['player_answer'],
         hesitations: json['hesitations'],
-        dificulty: json['hesitations'],
+        dificulty: json['dificulty'],
         loID: json['loID'],
         operation: OperationType.values[json['type']],
         duration: Duration(milliseconds: json['duration']));

@@ -30,8 +30,8 @@ List<Exercise> generateRandomExercise(
   return myExercises;
 }
 
-Future<List<Exercise>> generateExercisesFromLOPerformance(
-    Intensity myPerformance, int numberOfExercises) async {
+List<Exercise> generateExercisesFromLOPerformance(
+    Intensity myPerformance, int numberOfExercises) {
   List<Exercise> myExercises = List<Exercise>();
 
   int chosenLO = 0;
@@ -73,18 +73,23 @@ Future<List<Exercise>> generateExercisesFromLOPerformance(
       }
     }
 
-    List<Exercise> myExerciseslo = await _generateExercisesPerLO(
+    List<Exercise> myExerciseslo = _generateExercisesPerLO(
         numberOfDF, "LOIN$i", 0, OperationType.addition);
     for (Exercise ex in myExerciseslo) {
       myExercises.add(ex);
     }
-    myExerciseslo = await _generateExercisesPerLO(
+    myExerciseslo = _generateExercisesPerLO(
         numberOfDD, "LOIN$i", 1, OperationType.addition);
     for (Exercise ex in myExerciseslo) {
       myExercises.add(ex);
     }
   }
-
+  String path = localPath;
+  String filename = "WrongExercises";
+  io.File file = getLocalFile(path, filename);
+  if (file.existsSync()) {
+    file.deleteSync();
+  }
   return myExercises;
 }
 
@@ -101,13 +106,12 @@ bool _canBeAddedToList(List<int> list, int newNum, int comparator) {
   return true;
 }
 
-Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
-    String loIDString, int dificulty, OperationType opType) async {
+List<Exercise> _generateExercisesPerLO(
+    int numberExerc, String loIDString, int dificulty, OperationType opType) {
   List<Exercise> myExercises = List<Exercise>();
   List<int> choosenNumbersSum1 = List<int>();
   List<int> choosenNumbersSum2 = List<int>();
-  myExercises =
-      await _getPastExercisesFromFile(numberExerc, loIDString, dificulty);
+  myExercises = _getPastExercisesFromFile(numberExerc, loIDString, dificulty);
   numberExerc = numberExerc - myExercises.length;
   for (var i = 0; i < numberExerc; i++) {
     int loId = 0;
@@ -219,10 +223,10 @@ Future<List<Exercise>> _generateExercisesPerLO(int numberExerc,
   return myExercises;
 }
 
-Future<List<Exercise>> _getPastExercisesFromFile(
-    int numberExerc, String loIDString, int dificulty) async {
+List<Exercise> _getPastExercisesFromFile(
+    int numberExerc, String loIDString, int dificulty) {
   List<Exercise> myExercises = List<Exercise>();
-  String path = await localPath;
+  String path = localPath;
   String filename = "WrongExercises";
   io.File file = getLocalFile(path, filename);
   try {
@@ -250,8 +254,8 @@ Future<List<Exercise>> _getPastExercisesFromFile(
   return myExercises;
 }
 
-writeOnFIleWrongExercise(Exercise myWrongExercise) async {
-  String path = await localPath;
+void writeOnFIleWrongExercise(Exercise myWrongExercise) {
+  String path = localPath;
   String filename = "WrongExercises";
   io.File file = getLocalFile(path, filename);
   int dificulty = myWrongExercise.dificulty;

@@ -5,14 +5,20 @@ import 'package:mateop_engine/models/performance_vectors.dart';
 import 'package:mateop_engine/models/user.dart';
 
 void updateFileWithVectorPerformace(
-    ExerciseManager exerciseManager, MOUser user) async {
+    ExerciseManager exerciseManager, MOUser user) {
   PerformanceVectors performanceVectors =
       PerformanceVectors.readObjectFromFile(localPath);
   performanceVectors.updatePerformanceVectorsSet(
       exerciseManager.allExercises, user.grade, user.session);
   performanceVectors.writeObjectInFile(localPath);
-  await updatePerformanceData(user, performanceVectors.toJson);
-  await updateAverageTimes(exerciseManager, user);
+  try {
+    updatePerformanceData(user, performanceVectors.toJson);
+    // clearSessionFile(user);
+    deleteSessionFile(user);
+    // updateAverageTimes(exerciseManager, user);
+  } catch (e) {
+    print(e.toString());
+  }
 }
 
 void updateAverageTimes(ExerciseManager exerciseManager, MOUser user) async {

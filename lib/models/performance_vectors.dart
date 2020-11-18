@@ -53,8 +53,7 @@ class PerformanceVectors {
     jsonIntensities = {};
   }
 
-  void updatePerformanceVectorsSet(
-      List<Exercise> exercises, int grado, int sesion) {
+  void updatePerformanceVectorsSet(List exercises, int grado, int sesion) {
     learningObjectives = List(exercises.length);
     tiempos = List(exercises.length);
     correcto = List(exercises.length);
@@ -81,8 +80,8 @@ class PerformanceVectors {
     });
   }
 
-  void setBinLoPerformanceVectors(List binLO0, List binLO1,
-      List binLO2, List binLO3, List binLO4) {
+  void setBinLoPerformanceVectors(
+      List binLO0, List binLO1, List binLO2, List binLO3, List binLO4) {
     this.binLO0 = binLO0;
     this.binLO1 = binLO1;
     this.binLO2 = binLO2;
@@ -94,8 +93,8 @@ class PerformanceVectors {
     this.binPer = binPer;
   }
 
-  void setMulLoformanceVectors(List mulLO0, List mulLO1,
-      List mulLO2, List mulLO3, List mulLO4) {
+  void setMulLoformanceVectors(
+      List mulLO0, List mulLO1, List mulLO2, List mulLO3, List mulLO4) {
     this.mulLO0 = mulLO0;
     this.mulLO1 = mulLO1;
     this.mulLO2 = mulLO2;

@@ -8,6 +8,7 @@ import 'package:mateop_engine/models/performance_vectors.dart';
 import 'package:mateop_engine/models/user.dart';
 
 const String baseUrl = 'mate-op.herokuapp.com';
+// const String baseUrl = 'localhost:3000';
 
 // Calculate next intensity level with the bayesian model
 Future<Intensity> getNextIntensityLevel(Map map) async {
@@ -41,7 +42,7 @@ Future<Intensity> getNextIntensityLevel(Map map) async {
     currentPerformanceVectors
         .setMulPerPerformanceVectors(updatedPerformance['mulPer']);
     currentPerformanceVectors.setIntensities(intensity.toJson);
-    await currentPerformanceVectors.writeObjectInFile(localPath);
+    currentPerformanceVectors.writeObjectInFile(localPath);
     return intensity;
   } else {
     throw Exception('Error on request');
